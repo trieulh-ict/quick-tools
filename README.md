@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Quick Tools
 
-## Getting Started
+A collection of handy web-based tools for developers, built with [Next.js](https://nextjs.org) and deployed on GitHub Pages.
 
-First, run the development server:
+## Features
 
+- Color Converter: Convert between HEX and ARGB color formats
+- JSON Formatter: Format, validate JSON, and convert between JSON and other formats
+- Image Base64 Tool: Convert images to base64 and vice versa
+
+## Live Demo
+
+Visit [Quick Tools](https://trieulh-ict.github.io/quick-tools/) to try it out!
+
+## Development
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/trieulh-ict/quick-tools.git
+cd quick-tools
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Run the development server:
+```bash
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open [http://localhost:3000/quick-tools](http://localhost:3000/quick-tools) to see the result.
 
-## Learn More
+## Deployment
 
-To learn more about Next.js, take a look at the following resources:
+The project is configured for GitHub Pages deployment. To deploy:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run deploy
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This will build the project and deploy it to the `gh-pages` branch.
 
-## Deploy on Vercel
+## Recent Updates
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Fixed linting issues in ColorConverter and JsonFormatter components
+- Improved image handling in ImageBase64Tool
+- Optimized performance with React hooks (useCallback)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Built With
+
+- [Next.js](https://nextjs.org/) - The React framework
+- [Tailwind CSS](https://tailwindcss.com/) - For styling
+- [TypeScript](https://www.typescriptlang.org/) - For type safety
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
