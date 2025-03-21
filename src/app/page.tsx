@@ -8,6 +8,8 @@ import AboutMe from '../components/AboutMe';
 import Base64Tool from '../components/Base64Tool';
 import ImageBase64Tool from '../components/ImageBase64Tool';
 import ColorConverter from '../components/ColorConverter';
+import TimeConverter from '../components/TimeConverter';
+import PlantUMLVisualizer from '../components/PlantUMLVisualizer';
 
 export default function Home() {
   const [selectedTool, setSelectedTool] = useState('');
@@ -24,6 +26,10 @@ export default function Home() {
         return <ImageBase64Tool />;
       case 'color':
         return <ColorConverter />;
+      case 'time':
+        return <TimeConverter />;
+      case 'plantuml':
+        return <PlantUMLVisualizer />;
       case 'about':
         return <AboutMe />;
       default:
@@ -114,6 +120,16 @@ export default function Home() {
             >
               Markdown Editor
             </li>
+            <li
+              className={`w-full text-center px-3 py-3 rounded-lg cursor-pointer transition-all duration-300 ${
+                selectedTool === 'plantuml' 
+                  ? 'bg-gray-700 shadow-md' 
+                  : 'hover:bg-gray-700 hover:text-white'
+              }`}
+              onClick={() => setSelectedTool('plantuml')}
+            >
+              PlantUML Visualizer
+            </li>
           <li
               className={`w-full text-center px-3 py-3 rounded-lg cursor-pointer transition-all duration-300 ${
                 selectedTool === 'base64' 
@@ -134,16 +150,26 @@ export default function Home() {
             >
               Image to Base64 & Base64 to Image
             </li>
-          <li
-            className={`w-full text-center px-3 py-3 rounded-lg cursor-pointer transition-all duration-300 ${
-              selectedTool === 'color' 
-                ? 'bg-gray-700 shadow-md' 
-                : 'hover:bg-gray-700 hover:text-white'
-            }`}
-            onClick={() => setSelectedTool('color')}
-          >
-            Color Converter
-          </li>
+            <li
+              className={`w-full text-center px-3 py-3 rounded-lg cursor-pointer transition-all duration-300 ${
+                selectedTool === 'color' 
+                  ? 'bg-gray-700 shadow-md' 
+                  : 'hover:bg-gray-700 hover:text-white'
+              }`}
+              onClick={() => setSelectedTool('color')}
+            >
+              Color Converter
+            </li>
+            <li
+              className={`w-full text-center px-3 py-3 rounded-lg cursor-pointer transition-all duration-300 ${
+                selectedTool === 'time' 
+                  ? 'bg-gray-700 shadow-md' 
+                  : 'hover:bg-gray-700 hover:text-white'
+              }`}
+              onClick={() => setSelectedTool('time')}
+            >
+              Time Converter
+            </li>
             <div className="mt-6 w-full">
               <hr className="border-gray-600 my-4" />
               <li
