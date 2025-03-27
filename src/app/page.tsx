@@ -11,6 +11,7 @@ import ColorConverter from '../components/ColorConverter';
 import TimeConverter from '../components/TimeConverter';
 import PlantUMLVisualizer from '../components/PlantUMLVisualizer';
 import AndroidAssetGenerator from '../components/AndroidAssetGenerator';
+import VimCheatSheet from '../components/VimCheatSheet';
 
 export default function Home() {
   const [selectedTool, setSelectedTool] = useState('');
@@ -35,6 +36,8 @@ export default function Home() {
         return <AboutMe />;
       case 'android-assets':
         return <AndroidAssetGenerator />;
+      case 'vim':
+        return <VimCheatSheet />;
       default:
         return (
           <div className="flex flex-col items-center justify-center h-full">
@@ -48,7 +51,7 @@ export default function Home() {
   return (
     <div className="flex min-h-screen font-sans">
       {/* Sidebar */}
-      <aside className="w-64 bg-gradient-to-b from-gray-900 to-gray-800 text-white p-6 flex flex-col items-center shadow-lg border-r border-gray-900 shadow-md">
+      <aside className="w-108 bg-gradient-to-b from-gray-900 to-gray-800 text-white p-6 flex flex-col items-center shadow-lg border-r border-gray-900 shadow-md">
         {/* Author Profile Section */}
         <div className="flex flex-col items-center text-center">
           {/* Avatar Container */}
@@ -104,7 +107,7 @@ export default function Home() {
  
           <ul className="space-y-2 mt-3">
             <li
-              className={`w-full text-center px-3 py-3 rounded-lg cursor-pointer transition-all duration-300 ${
+              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-all duration-300 whitespace-nowrap ${
                 selectedTool === 'json' 
                   ? 'bg-gray-700 shadow-md' 
                   : 'hover:bg-gray-700 hover:text-white'
@@ -114,7 +117,7 @@ export default function Home() {
               JSON Formatter
             </li>
             <li
-              className={`w-full text-center px-3 py-3 rounded-lg cursor-pointer transition-all duration-300 ${
+              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-all duration-300 whitespace-nowrap ${
                 selectedTool === 'markdown' 
                   ? 'bg-gray-700 shadow-md' 
                   : 'hover:bg-gray-700 hover:text-white'
@@ -124,7 +127,7 @@ export default function Home() {
               Markdown Editor
             </li>
             <li
-              className={`w-full text-center px-3 py-3 rounded-lg cursor-pointer transition-all duration-300 ${
+              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-all duration-300 whitespace-nowrap ${
                 selectedTool === 'plantuml' 
                   ? 'bg-gray-700 shadow-md' 
                   : 'hover:bg-gray-700 hover:text-white'
@@ -134,7 +137,7 @@ export default function Home() {
               PlantUML Visualizer
             </li>
             <li
-              className={`w-full text-center px-3 py-3 rounded-lg cursor-pointer transition-all duration-300 ${
+              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-all duration-300 whitespace-nowrap ${
                 selectedTool === 'base64' 
                   ? 'bg-gray-700 shadow-md' 
                   : 'hover:bg-gray-700 hover:text-white'
@@ -144,7 +147,7 @@ export default function Home() {
               Base64 Decoder & Encoder
             </li>
             <li
-              className={`w-full text-center px-3 py-3 rounded-lg cursor-pointer transition-all duration-300 ${
+              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-all duration-300 whitespace-nowrap ${
                 selectedTool === 'image-base64' 
                   ? 'bg-gray-700 shadow-md' 
                   : 'hover:bg-gray-700 hover:text-white'
@@ -154,7 +157,7 @@ export default function Home() {
               Image to Base64 & Base64 to Image
             </li>
             <li
-              className={`w-full text-center px-3 py-3 rounded-lg cursor-pointer transition-all duration-300 ${
+              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-all duration-300 whitespace-nowrap ${
                 selectedTool === 'color' 
                   ? 'bg-gray-700 shadow-md' 
                   : 'hover:bg-gray-700 hover:text-white'
@@ -164,7 +167,7 @@ export default function Home() {
               Color Converter
             </li>
             <li
-              className={`w-full text-center px-3 py-3 rounded-lg cursor-pointer transition-all duration-300 ${
+              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-all duration-300 whitespace-nowrap ${
                 selectedTool === 'time' 
                   ? 'bg-gray-700 shadow-md' 
                   : 'hover:bg-gray-700 hover:text-white'
@@ -174,7 +177,7 @@ export default function Home() {
               Time Converter
             </li>
             <li
-              className={`w-full text-center px-3 py-3 rounded-lg cursor-pointer transition-all duration-300 ${
+              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-all duration-300 whitespace-nowrap ${
                 selectedTool === 'android-assets' 
                   ? 'bg-gray-700 shadow-md' 
                   : 'hover:bg-gray-700 hover:text-white'
@@ -183,10 +186,27 @@ export default function Home() {
             >
               Android Asset Generator
             </li>
+            {/* Resources Section */}
+            <div className="mt-10 text-left text-gray-300 font-bold text-sm uppercase tracking-wide">
+              Resources
+            </div>
+            
+            <ul className="space-y-2 mt-3">
+              <li
+                className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-all duration-300 whitespace-nowrap ${
+                  selectedTool === 'vim' 
+                    ? 'bg-gray-700 shadow-md' 
+                    : 'hover:bg-gray-700 hover:text-white'
+                }`}
+                onClick={() => setSelectedTool('vim')}
+              >
+                Vim Cheat Sheet
+              </li>
+            </ul>
             <div className="mt-6 w-full">
               <hr className="border-gray-600 my-4" />
               <li
-                className={`w-full text-center px-3 py-3 rounded-lg cursor-pointer transition-all duration-300 ${
+                className={`w-full text-center px-2 py-2 text-sm rounded-lg cursor-pointer transition-all duration-300 whitespace-nowrap ${
                   selectedTool === 'about' 
                     ? 'bg-gray-700 shadow-md' 
                     : 'hover:bg-gray-700 hover:text-white'
