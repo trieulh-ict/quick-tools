@@ -221,7 +221,7 @@ export default function Home() {
       </aside>
 
       {/* Main Content Area */}
-      <main className="flex-grow bg-gray-50 p-8 flex items-center justify-center w-full">
+      <main className="flex-grow min-w-240 bg-gray-50 p-8 flex items-center justify-center w-full">
         {renderContent()}
       </main>
     </div>

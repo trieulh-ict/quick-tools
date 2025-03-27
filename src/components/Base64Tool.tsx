@@ -20,7 +20,7 @@ export default function Base64Tool() {
   };
 
   return (
-    <div className="flex flex-col w-full h-[calc(100vh-2rem)] items-center bg-white p-6 rounded-lg shadow-lg">
+    <div className="flex flex-col w-full items-center bg-white p-6 rounded-lg shadow-lg">
       <h2 className="text-2xl font-bold mb-4 text-center">Base64 Encoder & Decoder</h2>
 
       {/* Toggle Encode/Decode Mode */}
@@ -50,13 +50,18 @@ export default function Base64Tool() {
       </div>
 
       {/* Input and Output Fields with Convert Button in the Middle */}
-      <div className="flex w-full gap-4 h-full">
+      <div className="flex w-full gap-4">
         {/* Input Text Area */}
         <textarea
-          className="w-full h-full p-3 border rounded-md bg-gray-50 shadow-inner resize-none"
+          className="w-full min-h-[50vh] p-3 border rounded-md bg-gray-50 shadow-inner overflow-hidden"
           placeholder="Enter text here..."
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={(e) => {
+            setInput(e.target.value);
+            e.target.style.height = 'auto';
+            e.target.style.height = `${e.target.scrollHeight}px`;
+          }}
+          style={{ height: 'auto' }}
         />
 
         {/* Convert Button in the Middle */}
@@ -71,9 +76,14 @@ export default function Base64Tool() {
 
         {/* Output Text Area */}
         <textarea
-          className="w-full h-full p-3 border rounded-md bg-gray-100 shadow-inner resize-none"
+          className="w-full min-h-[50vh] p-3 border rounded-md bg-gray-100 shadow-inner overflow-hidden"
           readOnly
           value={output}
+          style={{ height: 'auto' }}
+          onChange={(e) => {
+            e.target.style.height = 'auto';
+            e.target.style.height = `${e.target.scrollHeight}px`;
+          }}
         />
       </div>
     </div>

@@ -82,14 +82,19 @@ export default function JsonFormatter() {
   };
 
   return (
-    <div className="flex flex-col w-full h-[calc(100vh-2rem)] p-4 overflow-hidden">
+    <div className="flex flex-col w-full p-4 overflow-hidden">
       <h2 className="text-2xl font-bold mb-6 text-center">JSON Formatter</h2>
-      <div className="flex flex-1 flex-row gap-4 overflow-hidden items-center justify-center">
+      <div className="flex flex-1 flex-row gap-4 overflow-hidden items-start justify-center">
         <textarea
-          className="flex-1 w-full h-full max-w-[40%] border border-gray-300 rounded-md p-4 resize-none overflow-auto min-w-0"
+          className="flex-1 w-full min-h-[50vh] max-w-[40%] border border-gray-300 rounded-md p-4 overflow-hidden min-w-0"
           placeholder="Paste JSON here..."
           value={inputJson}
-          onChange={(e) => setInputJson(e.target.value)}
+          onChange={(e) => {
+            setInputJson(e.target.value);
+            e.target.style.height = 'auto';
+            e.target.style.height = `${e.target.scrollHeight}px`;
+          }}
+          style={{ height: 'auto' }}
         />
         <div className="flex flex-col justify-center items-center">
           <button
@@ -114,7 +119,7 @@ export default function JsonFormatter() {
             Switch to {isSnakeCase ? 'camelCase' : 'snake_case'}
           </button>
         </div>
-        <div className="flex-1 w-full h-full max-w-[40%] border border-gray-300 rounded-md p-4 overflow-auto min-w-0 bg-white flex relative">
+        <div className="flex-1 w-full min-h-[50vh] max-w-[40%] border border-gray-300 rounded-md p-4 overflow-auto min-w-0 bg-white flex relative">
           {/* Line Numbers */}
           <div className="pr-4 text-gray-500 text-right select-none font-mono">
             {formattedJson.split('\n').map((_, index) => (
