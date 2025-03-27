@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import JsonFormatter from '../components/JsonFormatter';
 import MarkdownEditor from '../components/MarkdownEditor';
 import AboutMe from '../components/AboutMe';
@@ -39,12 +39,7 @@ export default function Home() {
       case 'vim':
         return <VimCheatSheet />;
       default:
-        return (
-          <div className="flex flex-col items-center justify-center h-full">
-            <h2 className="text-2xl font-bold">Welcome to Quick Tools!</h2>
-            <p className="mt-4">Select a tool from the sidebar to get started.</p>
-          </div>
-        );
+        return <QuoteDisplay />;
     }
   };
 
@@ -84,7 +79,7 @@ export default function Home() {
           <div className="mt-4 w-full text-left">
             <hr className="border-gray-600 my-4" />
             <div className="flex items-center gap-2 text-gray-300">
-              📧 
+              📧
               <a href="mailto:trieulh.bk@gmail.com" className="text-sm truncate hover:underline">
                 trieulh.bk@gmail.com
               </a>
@@ -104,84 +99,76 @@ export default function Home() {
           <div className="text-left text-gray-300 font-bold text-sm uppercase tracking-wide">
             Quick Tools
           </div>
- 
+
           <ul className="space-y-2 mt-3">
             <li
-              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-transform duration-300 whitespace-nowrap transform ${
-                selectedTool === 'json' 
-                  ? 'bg-gray-700 shadow-md scale-[1.02]' 
-                  : 'hover:bg-gray-700 hover:text-white'
-              }`}
+              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-transform duration-300 whitespace-nowrap transform ${selectedTool === 'json'
+                ? 'bg-gray-700 shadow-md scale-[1.02]'
+                : 'hover:bg-gray-700 hover:text-white'
+                }`}
               onClick={() => setSelectedTool('json')}
             >
               JSON Formatter
             </li>
             <li
-              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-transform duration-300 whitespace-nowrap transform ${
-                selectedTool === 'markdown' 
-                  ? 'bg-gray-700 shadow-md scale-[1.02]' 
-                  : 'hover:bg-gray-700 hover:text-white'
-              }`}
+              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-transform duration-300 whitespace-nowrap transform ${selectedTool === 'markdown'
+                ? 'bg-gray-700 shadow-md scale-[1.02]'
+                : 'hover:bg-gray-700 hover:text-white'
+                }`}
               onClick={() => setSelectedTool('markdown')}
             >
               Markdown Editor
             </li>
             <li
-              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-transform duration-300 whitespace-nowrap transform ${
-                selectedTool === 'plantuml' 
-                  ? 'bg-gray-700 shadow-md scale-[1.02]' 
-                  : 'hover:bg-gray-700 hover:text-white'
-              }`}
+              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-transform duration-300 whitespace-nowrap transform ${selectedTool === 'plantuml'
+                ? 'bg-gray-700 shadow-md scale-[1.02]'
+                : 'hover:bg-gray-700 hover:text-white'
+                }`}
               onClick={() => setSelectedTool('plantuml')}
             >
               PlantUML Visualizer
             </li>
             <li
-              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-transform duration-300 whitespace-nowrap transform ${
-                selectedTool === 'base64' 
-                  ? 'bg-gray-700 shadow-md scale-[1.02]' 
-                  : 'hover:bg-gray-700 hover:text-white'
-              }`}
+              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-transform duration-300 whitespace-nowrap transform ${selectedTool === 'base64'
+                ? 'bg-gray-700 shadow-md scale-[1.02]'
+                : 'hover:bg-gray-700 hover:text-white'
+                }`}
               onClick={() => setSelectedTool('base64')}
             >
               Base64 Decoder & Encoder
             </li>
             <li
-              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-transform duration-300 whitespace-nowrap transform ${
-                selectedTool === 'image-base64' 
-                  ? 'bg-gray-700 shadow-md scale-[1.02]' 
-                  : 'hover:bg-gray-700 hover:text-white'
-              }`}
+              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-transform duration-300 whitespace-nowrap transform ${selectedTool === 'image-base64'
+                ? 'bg-gray-700 shadow-md scale-[1.02]'
+                : 'hover:bg-gray-700 hover:text-white'
+                }`}
               onClick={() => setSelectedTool('image-base64')}
             >
               Image to Base64 & Base64 to Image
             </li>
             <li
-              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-transform duration-300 whitespace-nowrap transform ${
-                selectedTool === 'color' 
-                  ? 'bg-gray-700 shadow-md scale-[1.02]' 
-                  : 'hover:bg-gray-700 hover:text-white'
-              }`}
+              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-transform duration-300 whitespace-nowrap transform ${selectedTool === 'color'
+                ? 'bg-gray-700 shadow-md scale-[1.02]'
+                : 'hover:bg-gray-700 hover:text-white'
+                }`}
               onClick={() => setSelectedTool('color')}
             >
               Color Converter
             </li>
             <li
-              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-transform duration-300 whitespace-nowrap transform ${
-                selectedTool === 'time' 
-                  ? 'bg-gray-700 shadow-md scale-[1.02]' 
-                  : 'hover:bg-gray-700 hover:text-white'
-              }`}
+              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-transform duration-300 whitespace-nowrap transform ${selectedTool === 'time'
+                ? 'bg-gray-700 shadow-md scale-[1.02]'
+                : 'hover:bg-gray-700 hover:text-white'
+                }`}
               onClick={() => setSelectedTool('time')}
             >
               Time Converter
             </li>
             <li
-              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-transform duration-300 whitespace-nowrap transform ${
-                selectedTool === 'android-assets' 
-                  ? 'bg-gray-700 shadow-md scale-[1.02]' 
-                  : 'hover:bg-gray-700 hover:text-white'
-              }`}
+              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-transform duration-300 whitespace-nowrap transform ${selectedTool === 'android-assets'
+                ? 'bg-gray-700 shadow-md scale-[1.02]'
+                : 'hover:bg-gray-700 hover:text-white'
+                }`}
               onClick={() => setSelectedTool('android-assets')}
             >
               Android Asset Generator
@@ -190,14 +177,13 @@ export default function Home() {
             <div className="mt-10 text-left text-gray-300 font-bold text-sm uppercase tracking-wide">
               Resources
             </div>
-            
+
             <ul className="space-y-2 mt-3">
               <li
-                className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-transform duration-300 whitespace-nowrap transform ${
-                  selectedTool === 'vim' 
-                    ? 'bg-gray-700 shadow-md scale-[1.02]' 
-                    : 'hover:bg-gray-700 hover:text-white'
-                }`}
+                className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-transform duration-300 whitespace-nowrap transform ${selectedTool === 'vim'
+                  ? 'bg-gray-700 shadow-md scale-[1.02]'
+                  : 'hover:bg-gray-700 hover:text-white'
+                  }`}
                 onClick={() => setSelectedTool('vim')}
               >
                 Vim Cheat Sheet
@@ -206,11 +192,10 @@ export default function Home() {
             <div className="mt-6 w-full">
               <hr className="border-gray-600 my-4" />
               <li
-                className={`w-full text-center px-2 py-2 text-sm rounded-lg cursor-pointer transition-transform duration-300 whitespace-nowrap transform ${
-                  selectedTool === 'about' 
-                    ? 'bg-gray-700 shadow-md scale-[1.02]' 
-                    : 'hover:bg-gray-700 hover:text-white'
-                }`}
+                className={`w-full text-center px-2 py-2 text-sm rounded-lg cursor-pointer transition-transform duration-300 whitespace-nowrap transform ${selectedTool === 'about'
+                  ? 'bg-gray-700 shadow-md scale-[1.02]'
+                  : 'hover:bg-gray-700 hover:text-white'
+                  }`}
                 onClick={() => setSelectedTool('about')}
               >
                 #About me
@@ -224,6 +209,32 @@ export default function Home() {
       <main className="animate-fade-in flex-grow min-w-240 bg-gray-50 p-8 flex items-center justify-center w-full">
         {renderContent()}
       </main>
+    </div>
+  );
+}
+
+function QuoteDisplay() {
+  const [quote, setQuote] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetch('https://api.allorigins.win/get?url=' + encodeURIComponent('https://animechan.io/api/v1/quotes/random'))
+      .then(res => res.json())
+      .then(data => {
+        const parsed = JSON.parse(data.contents);
+        if (parsed?.status === 'success' && parsed.data?.content) {
+          setQuote(parsed.data.content);
+        }
+      })
+      .catch(() => {
+        setQuote(null);
+      });
+  }, []);
+
+  return (
+    <div className="text-center">
+      <h2 className="text-2xl font-bold">Welcome to Quick Tools!</h2>
+      <p className="mt-4">Select a tool from the sidebar to get started.</p>
+      {quote && <blockquote className="mt-8 px-8 italic text-gray-600">“{quote}”</blockquote>}
     </div>
   );
 }
