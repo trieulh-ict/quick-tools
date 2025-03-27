@@ -10,6 +10,7 @@ import ImageBase64Tool from '../components/ImageBase64Tool';
 import ColorConverter from '../components/ColorConverter';
 import TimeConverter from '../components/TimeConverter';
 import PlantUMLVisualizer from '../components/PlantUMLVisualizer';
+import AndroidAssetGenerator from '../components/AndroidAssetGenerator';
 
 export default function Home() {
   const [selectedTool, setSelectedTool] = useState('');
@@ -32,6 +33,8 @@ export default function Home() {
         return <PlantUMLVisualizer />;
       case 'about':
         return <AboutMe />;
+      case 'android-assets':
+        return <AndroidAssetGenerator />;
       default:
         return (
           <div className="flex flex-col items-center justify-center h-full">
@@ -130,7 +133,7 @@ export default function Home() {
             >
               PlantUML Visualizer
             </li>
-          <li
+            <li
               className={`w-full text-center px-3 py-3 rounded-lg cursor-pointer transition-all duration-300 ${
                 selectedTool === 'base64' 
                   ? 'bg-gray-700 shadow-md' 
@@ -169,6 +172,16 @@ export default function Home() {
               onClick={() => setSelectedTool('time')}
             >
               Time Converter
+            </li>
+            <li
+              className={`w-full text-center px-3 py-3 rounded-lg cursor-pointer transition-all duration-300 ${
+                selectedTool === 'android-assets' 
+                  ? 'bg-gray-700 shadow-md' 
+                  : 'hover:bg-gray-700 hover:text-white'
+              }`}
+              onClick={() => setSelectedTool('android-assets')}
+            >
+              Android Asset Generator
             </li>
             <div className="mt-6 w-full">
               <hr className="border-gray-600 my-4" />
