@@ -1,6 +1,46 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { BsEyedropper } from 'react-icons/bs';
+
+interface EyeDropperResult {
+  sRGBHex: string;
+}
+
+type EyeDropperConstructor = new () => {
+  open(): Promise<EyeDropperResult>;
+};
+
+declare global {
+  interface Window {
+    EyeDropper: EyeDropperConstructor;
+    triggerEyedropper?: () => Promise<void>;
+  }
+}
+
+function useEyedropper(onPick: (rgba: { r: number; g: number; b: number }) => void) {
+  useEffect(() => {
+    async function handlePick() {
+      if ('EyeDropper' in window) {
+        const eyeDropper = new window.EyeDropper();
+        try {
+          const result = await eyeDropper.open();
+          const rgba = await fetch(`https://www.thecolorapi.com/id?hex=${result.sRGBHex.replace('#', '')}`)
+            .then(res => res.json())
+            .then(data => data.rgb);
+
+          onPick(rgba);
+        } catch (e) {
+          console.error('Eyedropper cancelled or failed', e);
+        }
+      } else {
+        alert('EyeDropper API not supported in your browser.');
+      }
+    }
+
+    window.triggerEyedropper = handlePick;
+  }, [onPick]);
+}
 
 export default function ColorConverter() {
   const [mode, setMode] = useState<'argb' | 'hex'>('argb');
@@ -16,12 +56,23 @@ export default function ColorConverter() {
     setHex(hexColor.toUpperCase());
   }, [alpha, red, green, blue]);
 
+  useEyedropper((rgba) => {
+    setRed(rgba.r);
+    setGreen(rgba.g);
+    setBlue(rgba.b);
+    setAlpha(255);
+
+    if (mode === 'hex') {
+      const hexColor = `#${(255).toString(16).padStart(2, '0')}${rgba.r.toString(16).padStart(2, '0')}${rgba.g.toString(16).padStart(2, '0')}${rgba.b.toString(16).padStart(2, '0')}`;
+      setHex(hexColor.toUpperCase());
+    }
+  });
+
   const copyToClipboard = () => {
     navigator.clipboard.writeText(hex);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000); // Hide snackbar after 2 sec
   };
-
 
   return (
     <div className="flex flex-col items-center w-full max-w-2xl bg-white p-6 rounded-lg shadow-lg">
@@ -93,6 +144,13 @@ export default function ColorConverter() {
                 className="w-12 h-12 rounded-md border" 
                 style={{ backgroundColor: `rgba(${red}, ${green}, ${blue}, ${alpha / 255})` }} 
               ></div>
+              <button
+                className="ml-2 p-2 border rounded-md hover:bg-gray-100"
+                onClick={() => window.triggerEyedropper?.()}
+                title="Pick color from screen"
+              >
+                <BsEyedropper size={20} />
+              </button>
             </div>
             {/* Removed Convert to HEX button */}
             <input 
@@ -132,6 +190,13 @@ export default function ColorConverter() {
               <span className="text-gray-600">B: {blue}</span>
               {/* Color Preview */}
               <div className="w-12 h-12 rounded-md border" style={{ backgroundColor: `rgba(${red}, ${green}, ${blue}, ${alpha / 255})` }}></div>
+              <button
+                className="ml-2 p-2 border rounded-md hover:bg-gray-100"
+                onClick={() => window.triggerEyedropper?.()}
+                title="Pick color from screen"
+              >
+                <BsEyedropper size={20} />
+              </button>
             </div>
           </div>
         )}

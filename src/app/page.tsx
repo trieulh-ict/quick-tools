@@ -107,9 +107,9 @@ export default function Home() {
  
           <ul className="space-y-2 mt-3">
             <li
-              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-all duration-300 whitespace-nowrap ${
+              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-transform duration-300 whitespace-nowrap transform ${
                 selectedTool === 'json' 
-                  ? 'bg-gray-700 shadow-md' 
+                  ? 'bg-gray-700 shadow-md scale-[1.02]' 
                   : 'hover:bg-gray-700 hover:text-white'
               }`}
               onClick={() => setSelectedTool('json')}
@@ -117,9 +117,9 @@ export default function Home() {
               JSON Formatter
             </li>
             <li
-              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-all duration-300 whitespace-nowrap ${
+              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-transform duration-300 whitespace-nowrap transform ${
                 selectedTool === 'markdown' 
-                  ? 'bg-gray-700 shadow-md' 
+                  ? 'bg-gray-700 shadow-md scale-[1.02]' 
                   : 'hover:bg-gray-700 hover:text-white'
               }`}
               onClick={() => setSelectedTool('markdown')}
@@ -127,9 +127,9 @@ export default function Home() {
               Markdown Editor
             </li>
             <li
-              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-all duration-300 whitespace-nowrap ${
+              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-transform duration-300 whitespace-nowrap transform ${
                 selectedTool === 'plantuml' 
-                  ? 'bg-gray-700 shadow-md' 
+                  ? 'bg-gray-700 shadow-md scale-[1.02]' 
                   : 'hover:bg-gray-700 hover:text-white'
               }`}
               onClick={() => setSelectedTool('plantuml')}
@@ -137,9 +137,9 @@ export default function Home() {
               PlantUML Visualizer
             </li>
             <li
-              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-all duration-300 whitespace-nowrap ${
+              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-transform duration-300 whitespace-nowrap transform ${
                 selectedTool === 'base64' 
-                  ? 'bg-gray-700 shadow-md' 
+                  ? 'bg-gray-700 shadow-md scale-[1.02]' 
                   : 'hover:bg-gray-700 hover:text-white'
               }`}
               onClick={() => setSelectedTool('base64')}
@@ -147,9 +147,9 @@ export default function Home() {
               Base64 Decoder & Encoder
             </li>
             <li
-              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-all duration-300 whitespace-nowrap ${
+              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-transform duration-300 whitespace-nowrap transform ${
                 selectedTool === 'image-base64' 
-                  ? 'bg-gray-700 shadow-md' 
+                  ? 'bg-gray-700 shadow-md scale-[1.02]' 
                   : 'hover:bg-gray-700 hover:text-white'
               }`}
               onClick={() => setSelectedTool('image-base64')}
@@ -157,9 +157,9 @@ export default function Home() {
               Image to Base64 & Base64 to Image
             </li>
             <li
-              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-all duration-300 whitespace-nowrap ${
+              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-transform duration-300 whitespace-nowrap transform ${
                 selectedTool === 'color' 
-                  ? 'bg-gray-700 shadow-md' 
+                  ? 'bg-gray-700 shadow-md scale-[1.02]' 
                   : 'hover:bg-gray-700 hover:text-white'
               }`}
               onClick={() => setSelectedTool('color')}
@@ -167,9 +167,9 @@ export default function Home() {
               Color Converter
             </li>
             <li
-              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-all duration-300 whitespace-nowrap ${
+              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-transform duration-300 whitespace-nowrap transform ${
                 selectedTool === 'time' 
-                  ? 'bg-gray-700 shadow-md' 
+                  ? 'bg-gray-700 shadow-md scale-[1.02]' 
                   : 'hover:bg-gray-700 hover:text-white'
               }`}
               onClick={() => setSelectedTool('time')}
@@ -177,9 +177,9 @@ export default function Home() {
               Time Converter
             </li>
             <li
-              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-all duration-300 whitespace-nowrap ${
+              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-transform duration-300 whitespace-nowrap transform ${
                 selectedTool === 'android-assets' 
-                  ? 'bg-gray-700 shadow-md' 
+                  ? 'bg-gray-700 shadow-md scale-[1.02]' 
                   : 'hover:bg-gray-700 hover:text-white'
               }`}
               onClick={() => setSelectedTool('android-assets')}
@@ -193,9 +193,9 @@ export default function Home() {
             
             <ul className="space-y-2 mt-3">
               <li
-                className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-all duration-300 whitespace-nowrap ${
+                className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-transform duration-300 whitespace-nowrap transform ${
                   selectedTool === 'vim' 
-                    ? 'bg-gray-700 shadow-md' 
+                    ? 'bg-gray-700 shadow-md scale-[1.02]' 
                     : 'hover:bg-gray-700 hover:text-white'
                 }`}
                 onClick={() => setSelectedTool('vim')}
@@ -206,9 +206,9 @@ export default function Home() {
             <div className="mt-6 w-full">
               <hr className="border-gray-600 my-4" />
               <li
-                className={`w-full text-center px-2 py-2 text-sm rounded-lg cursor-pointer transition-all duration-300 whitespace-nowrap ${
+                className={`w-full text-center px-2 py-2 text-sm rounded-lg cursor-pointer transition-transform duration-300 whitespace-nowrap transform ${
                   selectedTool === 'about' 
-                    ? 'bg-gray-700 shadow-md' 
+                    ? 'bg-gray-700 shadow-md scale-[1.02]' 
                     : 'hover:bg-gray-700 hover:text-white'
                 }`}
                 onClick={() => setSelectedTool('about')}
@@ -221,7 +221,7 @@ export default function Home() {
       </aside>
 
       {/* Main Content Area */}
-      <main className="flex-grow min-w-240 bg-gray-50 p-8 flex items-center justify-center w-full">
+      <main className="animate-fade-in flex-grow min-w-240 bg-gray-50 p-8 flex items-center justify-center w-full">
         {renderContent()}
       </main>
     </div>
