@@ -1,4 +1,7 @@
 import { useState } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
 
 type VimCommand = {
   key: string;
@@ -355,42 +358,44 @@ export default function VimCheatSheet() {
   }).filter(c => c.commands.length > 0);
 
   return (
-    <div className="w-full h-full p-6 overflow-y-auto">
-      <div className="sticky top-0 z-20 bg-white/80 backdrop-blur-md border border-gray-200 px-6 py-6 mb-4 shadow-sm rounded-md">
-        <h2 className="text-2xl font-bold mb-2">Vim Cheat Sheet</h2>
-        <input
+    <Card className="w-full h-full p-6 overflow-y-auto">
+      <CardHeader className="sticky top-0 z-20 bg-background/80 backdrop-blur-md border px-6 py-6 mb-4 shadow-sm rounded-md">
+        <CardTitle className="text-2xl font-bold mb-2 whitespace-nowrap overflow-hidden text-ellipsis">Vim Cheat Sheet</CardTitle>
+        <Input
           type="text"
           value={search}
           onChange={e => setSearch(e.target.value)}
           placeholder="Search key or description..."
-          className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full"
         />
-      </div>
-      {filtered.map((section, i) => (
-        <div key={i}>
-          <h3 className="text-xl font-bold text-white bg-gray-800 px-4 py-2 rounded-md shadow mb-4">
-            {section.category}
-          </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">
-              {section.commands.map((cmd, idx) => (
-              <div key={idx} className="flex flex-col items-start gap-1 p-4 rounded bg-white shadow-md transform transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg">
-                <kbd className="px-2 py-1 text-xs font-semibold text-gray-800 bg-gray-200 border border-gray-400 rounded whitespace-nowrap">
-                  {cmd.key}
-                </kbd>
-                <span className="text-sm text-gray-800">
-                  {cmd.description.split(new RegExp(`(${search.split(/\s+/).filter(Boolean).join('|')})`, 'gi')).map((part, i) =>
-                    search.toLowerCase().split(/\s+/).includes(part.toLowerCase()) ? (
-                      <mark key={i} className="bg-yellow-200 rounded">{part}</mark>
-                    ) : (
-                      part
-                    )
-                  )}
-                </span>
-              </div>
-            ))}
+      </CardHeader>
+      <CardContent className="p-0">
+        {filtered.map((section, i) => (
+          <div key={i} className="mb-6">
+            <h3 className="text-xl font-bold bg-secondary text-secondary-foreground px-4 py-2 rounded-md shadow mb-4">
+              {section.category}
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                {section.commands.map((cmd, idx) => (
+                <Card key={idx} className="flex flex-col items-start gap-1 p-4 transform transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg">
+                  <Badge variant="secondary" className="px-2 py-1 text-xs font-semibold whitespace-nowrap">
+                    {cmd.key}
+                  </Badge>
+                  <span className="text-sm text-muted-foreground">
+                    {cmd.description.split(new RegExp(`(${search.split(/\s+/).filter(Boolean).join('|')})`, 'gi')).map((part, i) =>
+                      search.toLowerCase().split(/\s+/).includes(part.toLowerCase()) ? (
+                        <mark key={i} className="bg-yellow-200 rounded">{part}</mark>
+                      ) : (
+                        part
+                      )
+                    )}
+                  </span>
+                </Card>
+              ))}
+            </div>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </CardContent>
+    </Card>
   );
 }

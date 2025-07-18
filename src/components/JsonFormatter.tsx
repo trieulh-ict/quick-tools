@@ -1,22 +1,41 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
-import { Highlight, themes } from 'prism-react-renderer';
-const lightTheme = {
-  ...themes.github,
-  plain: {
-    ...themes.github.plain,
-    backgroundColor: "#ffffff",
-  },
-};
+import { useState, useEffect, useCallback, useRef } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
+import { toast } from 'sonner';
+import AceEditor from "react-ace";
+
+import "ace-builds/src-noconflict/mode-json";
+import "ace-builds/src-noconflict/mode-xml";
+import "ace-builds/src-noconflict/theme-github";
+import "ace-builds/src-noconflict/ext-language_tools";
 
 export default function JsonFormatter() {
   const [inputJson, setInputJson] = useState('');
   const [formattedJson, setFormattedJson] = useState('');
   const [isValidJson, setIsValidJson] = useState(false);
-  const [showSnackbar, setShowSnackbar] = useState(false);
   const [isXmlFormat, setIsXmlFormat] = useState(false);
   const [isSnakeCase, setIsSnakeCase] = useState(false);
+
+  const [codeEditorHeight, setCodeEditorHeight] = useState(0);
+  
+
+  const textareaInputRef = useRef<HTMLTextAreaElement | null>(null);
+  const textareaOutputRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    function updateHeights() {
+      if (textareaInputRef.current) {
+        setCodeEditorHeight(textareaInputRef.current.clientHeight);
+      }
+      
+    }
+    updateHeights();
+    window.addEventListener('resize', updateHeights);
+    return () => window.removeEventListener('resize', updateHeights);
+  }, [inputJson, formattedJson]);
 
   const toSnakeCase = (str: string) =>
     str.replace(/([A-Z])/g, (match, offset) =>
@@ -76,77 +95,73 @@ export default function JsonFormatter() {
   const handleCopy = () => {
     if (isValidJson) {
       navigator.clipboard.writeText(formattedJson);
-      setShowSnackbar(true);
-      setTimeout(() => setShowSnackbar(false), 3000);
+      toast("JSON copied successfully!", {
+        description: "The formatted JSON has been copied to your clipboard.",
+      });
     }
   };
 
   return (
-    <div className="flex flex-col w-full p-4 overflow-hidden">
-      <h2 className="text-2xl font-bold mb-6 text-center">JSON Formatter</h2>
-      <div className="flex flex-1 flex-row gap-4 overflow-hidden items-start justify-center">
-        <textarea
-          className="flex-1 w-full min-h-[50vh] max-w-[40%] border border-gray-300 rounded-md p-4 overflow-hidden min-w-0"
+    <Card className="flex flex-col w-full p-4 overflow-hidden">
+      <CardHeader>
+        <CardTitle className="text-2xl font-bold text-center whitespace-nowrap overflow-hidden text-ellipsis">JSON Formatter</CardTitle>
+      </CardHeader>
+      <CardContent className="flex flex-1 flex-row gap-4 overflow-hidden min-h-[60vh] items-start justify-center">
+        <Textarea
+          ref={textareaInputRef}
+          className="flex-1 w-full min-h-[50vh] p-4 min-w-0"
           placeholder="Paste JSON here..."
           value={inputJson}
           onChange={(e) => {
             setInputJson(e.target.value);
-            e.target.style.height = 'auto';
-            e.target.style.height = `${e.target.scrollHeight}px`;
           }}
-          style={{ height: 'auto' }}
         />
         <div className="flex flex-col justify-center items-center">
-          <button
-            className={`w-full px-4 py-2 rounded-md font-semibold transition-all ${
-                isValidJson ? 'bg-blue-500 text-white hover:bg-blue-600' : 'bg-gray-400 text-gray-700 cursor-not-allowed'
-              }`}
+          <Button
+            className="w-full"
             disabled={!isValidJson}
             onClick={handleCopy}
           >
             Copy JSON
-          </button>
-          <button
-            className={`w-full mt-2 px-4 py-2 rounded-md font-semibold bg-blue-500 text-white hover:bg-blue-600 transition-all`}
+          </Button>
+          <Button
+            className="w-full mt-2"
             onClick={() => setIsXmlFormat((prev) => !prev)}
           >
             Switch to {isXmlFormat ? 'JSON' : 'XML'}
-          </button>
-          <button
-            className={`w-full mt-2 px-4 py-2 rounded-md font-semibold bg-blue-500 text-white hover:bg-blue-600 transition-all`}
+          </Button>
+          <Button
+            className="w-full mt-2"
             onClick={() => setIsSnakeCase((prev) => !prev)}
           >
             Switch to {isSnakeCase ? 'camelCase' : 'snake_case'}
-          </button>
+          </Button>
         </div>
-        <div className="flex-1 w-full min-h-[50vh] max-w-[40%] border border-gray-300 rounded-md p-4 overflow-auto min-w-0 bg-white flex relative">
-          {/* Line Numbers */}
-          <div className="pr-4 text-gray-500 text-right select-none font-mono">
-            {formattedJson.split('\n').map((_, index) => (
-              <div key={index} className="leading-6">{index + 1}</div>
-            ))}
-          </div>
-          {/* JSON Output */}
-          <Highlight theme={lightTheme} code={formattedJson} language={isXmlFormat ? "xml" : "json"}>
-            {({ className, style, tokens, getLineProps, getTokenProps }) => (
-              <pre className={`w-full bg-white ${className}`} style={style}>
-                {tokens.map((line, i) => (
-                  <div key={i} {...getLineProps({ line })} className="flex">
-                    {line.map((token, key) => (
-                      <span key={key} {...getTokenProps({ token })} />
-                    ))}
-                  </div>
-                ))}
-              </pre>
-            )}
-          </Highlight>
-          {showSnackbar && (
-            <div className="fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded-md shadow-md">
-              ✅ JSON copied successfully!
-            </div>
-          )}
+        <div ref={textareaOutputRef} className="flex-1 w-full min-w-0 bg-white flex relative h-full">
+          <AceEditor
+            mode={isXmlFormat ? "xml" : "json"}
+            theme="github"
+            name="json-output-editor"
+            editorProps={{ $blockScrolling: true }}
+            value={formattedJson}
+            readOnly={true}
+            width="100%"
+            height={codeEditorHeight ? `${codeEditorHeight}px` : '100%'}
+            highlightActiveLine={false}
+            showGutter={true}
+            showPrintMargin={false}
+            fontSize={16}
+            wrapEnabled={true}
+            setOptions={{
+              enableBasicAutocompletion: false,
+              enableLiveAutocompletion: false,
+              enableSnippets: false,
+              showLineNumbers: true,
+              tabSize: 2,
+            }}
+          />
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 }

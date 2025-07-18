@@ -2,6 +2,9 @@
 
 import { useState, useEffect, useRef } from 'react';
 import plantumlEncoder from 'plantuml-encoder';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
 
 export default function PlantUMLVisualizer() {
   const [umlCode, setUmlCode] = useState(``);
@@ -34,23 +37,25 @@ export default function PlantUMLVisualizer() {
   }, [umlCode]);
 
   return (
-    <div className="flex flex-col w-full bg-white p-6 rounded-lg shadow-lg">
-      <div className="flex w-full items-center w-full mb-4">
-        <h2 className="text-2xl font-bold mr-2">PlantUML Visualizer</h2>
+    <Card className="flex flex-col w-full p-6">
+      <CardHeader className="flex flex-row items-center justify-between w-full mb-4">
+        <CardTitle className="text-2xl font-bold whitespace-nowrap">PlantUML Visualizer</CardTitle>
         {/* Help Icon next to title */}
-        <button
+        <Button
+          variant="outline"
+          size="icon"
           onClick={() => setShowHelp(!showHelp)}
-          className="bg-gray-300 w-6 h-6 flex items-center justify-center rounded-full text-sm font-bold hover:bg-gray-400 transition-all"
+          className="rounded-full text-sm font-bold"
         >
           ?
-        </button>
-      </div>
+        </Button>
+      </CardHeader>
 
       {/* Help Content */}
       {showHelp && (
-        <div className="mb-4 p-4 w-full border rounded-md bg-gray-100 text-sm">
-          <strong className="text-lg font-semibold">PlantUML Syntax Guide:</strong>
-          <div className="mt-3 flex flex-wrap gap-2">
+        <Card className="mb-4 p-4 text-sm">
+          <CardTitle className="text-lg font-semibold whitespace-nowrap overflow-hidden text-ellipsis">PlantUML Syntax Guide:</CardTitle>
+          <CardContent className="mt-3 flex flex-wrap gap-2 p-0">
             {[
               { name: 'Class Diagram', link: 'https://plantuml.com/class-diagram' },
               { name: 'Use Case Diagram', link: 'https://plantuml.com/use-case-diagram' },
@@ -66,26 +71,26 @@ export default function PlantUMLVisualizer() {
               { name: 'Work Breakdown Structure', link: 'https://plantuml.com/wbs-diagram' },
               { name: 'Salt UI Mockup', link: 'https://plantuml.com/salt' }
             ].map((item) => (
-              <a
-                key={item.name}
-                href={item.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-3 py-2 text-center rounded-lg shadow-md text-blue-600 font-semibold hover:bg-blue-500 hover:text-white transition-all cursor-pointer bg-white whitespace-nowrap"
-              >
-                {item.name}
-              </a>
+              <Button asChild key={item.name} variant="outline">
+                <a
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {item.name}
+                </a>
+              </Button>
             ))}
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       )}
 
       {/* Main Content */}
       <div className="flex flex-col w-full md:flex-row w-full gap-4">
         {/* UML Code Input */}
-        <textarea
+        <Textarea
           ref={textAreaRef}
-          className="w-full md:w-1/2 p-2 border rounded-md bg-gray-100 font-mono resize-none overflow-hidden"
+          className="w-full md:w-1/2 font-mono resize-none"
           value={umlCode}
           onChange={handleInputChange}
           placeholder="Enter PlantUML code here..."
@@ -93,7 +98,7 @@ export default function PlantUMLVisualizer() {
         />
 
         {/* Rendered UML Image */}
-        <div className="w-full md:w-1/2 border rounded-md p-2 bg-gray-50 flex items-center justify-center">
+        <Card className="w-full md:w-1/2 p-2 flex items-center justify-center min-h-[50vh]">
           {/* Using regular img tag for dynamically generated PlantUML images instead of Next.js Image component,
               as we're working with dynamically generated remote SVGs from the PlantUML server */}
           {umlUrl ? (
@@ -105,8 +110,8 @@ export default function PlantUMLVisualizer() {
           ) : (
             <p className="text-gray-600">Diagram preview will appear here.</p>
           )}
-        </div>
+        </Card>
       </div>
-    </div>
+    </Card>
   );
 }

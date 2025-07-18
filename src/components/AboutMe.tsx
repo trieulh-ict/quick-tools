@@ -1,45 +1,50 @@
 'use client';
 
 import Image from 'next/image';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 
 export default function AboutMe() {
   return (
-    <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg p-8 flex flex-col lg:flex-row gap-8">
+    <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-8 animate-fade-in">
       {/* Experience Section */}
-      <div className="lg:w-2/3">
-        <div className="flex flex-col items-center text-center">
+      <Card className="lg:w-2/3 p-8 hover:shadow-xl transition-shadow duration-300">
+        <CardContent className="flex flex-col items-center text-center p-0">
           <Image
             src={`${process.env.NEXT_PUBLIC_BASE_PATH}/avatar.jpeg`}
             alt="Lê Hải Triều"
             width={120}
             height={120}
-            className="rounded-full border-4 border-gray-600 shadow-md"
+            className="rounded-full border-4 border-primary shadow-md transition-transform duration-300 hover:scale-105"
           />
-          <h1 className="text-3xl font-bold mt-4">Lê Hải Triều</h1>
-          <p className="text-gray-500 text-lg">Experienced Android Developer | Mobile Enthusiast 🚀</p>
+          <h1 className="text-3xl font-bold mt-4 text-primary">Lê Hải Triều</h1>
+          <p className="text-muted-foreground text-lg">Experienced Android Developer | Mobile Enthusiast 🚀</p>
 
           {/* Social Links */}
           <div className="mt-4 flex justify-center gap-6">
-            <a 
-              href="https://github.com/trieulh-ict" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="text-white bg-gray-800 px-4 py-2 rounded-md text-sm font-semibold hover:bg-gray-700 transition-all"
-            >
-              🌐 GitHub
-            </a>
-            <a 
-              href="https://linkedin.com/in/le-hai-trieu-71443711b/" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="text-white bg-blue-600 px-4 py-2 rounded-md text-sm font-semibold hover:bg-blue-500 transition-all"
-            >
-              💼 LinkedIn
-            </a>
+            <Button asChild variant="outline" size="lg">
+              <a 
+                href="https://github.com/trieulh-ict" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+              >
+                🌐 GitHub
+              </a>
+            </Button>
+            <Button asChild variant="outline" size="lg">
+              <a 
+                href="https://linkedin.com/in/le-hai-trieu-71443711b/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+              >
+                💼 LinkedIn
+              </a>
+            </Button>
           </div>
-        </div>
+        </CardContent>
 
-        <div className="mt-6 text-gray-700 text-center">
+        <div className="mt-6 text-muted-foreground text-center">
           <p>
             I’m an <strong>Android developer</strong> with <strong>10+ years</strong> of experience, passionate about building smooth, high-performance mobile applications. 
             I thrive in <strong>product-driven environments</strong> where I can contribute to impactful mobile experiences.
@@ -47,7 +52,9 @@ export default function AboutMe() {
         </div>
 
         <div className="mt-8">
-          <h2 className="text-2xl font-semibold border-b pb-2">📌 Professional Experience</h2>
+          <CardHeader className="p-0">
+            <CardTitle className="text-2xl font-semibold border-b pb-2 whitespace-nowrap overflow-hidden text-ellipsis">📌 Professional Experience</CardTitle>
+          </CardHeader>
           <ul className="mt-4 space-y-6">
             {[
               { title: "Senior Android Developer", company: "CIMB Thai Bank", duration: "Oct 2022 - Present", description: "Leading fintech Android development for seamless banking solutions." },
@@ -59,39 +66,45 @@ export default function AboutMe() {
               { title: "Android Developer", company: "Airpoli", duration: "Mar 2016 - 2017", description: "Developing Android applications for an education startup." },
               { title: "Software Engineer", company: "Samsung Vietnam Mobile R&D Center", duration: "Jun 2014 - Mar 2016", description: "Worked on mobile software development for Samsung devices." },
             ].map((job, index) => (
-              <li key={index} className="bg-gray-100 p-4 rounded-md shadow">
-                <h3 className="text-xl font-semibold">{job.title} @ {job.company}</h3>
-                <p className="text-gray-500">{job.duration}</p>
-                <p className="mt-2 whitespace-pre-line">{job.description}</p>
+              <li key={index} className="p-4 rounded-md shadow-sm hover:shadow-md transition-shadow duration-200">
+                <h3 className="text-xl font-semibold text-foreground">{job.title} @ {job.company}</h3>
+                <p className="text-muted-foreground">{job.duration}</p>
+                <p className="mt-2 whitespace-pre-line text-secondary-foreground">{job.description}</p>
               </li>
             ))}
           </ul>
         </div>
-      </div>
+      </Card>
 
       {/* Tech Stack & Skills and Education Sections */}
       <div className="lg:w-1/3 flex flex-col gap-6">
         {/* Skills Section */}
-        <div className="bg-gray-100 p-4 rounded-md shadow">
-          <h2 className="text-2xl font-semibold border-b pb-2">💡 Tech Stack & Skills</h2>
-          <div className="mt-4 flex flex-wrap gap-2">
+        <Card className="p-4 hover:shadow-xl transition-shadow duration-300">
+          <CardHeader className="p-0">
+            <CardTitle className="text-2xl font-semibold border-b pb-2 whitespace-nowrap overflow-hidden text-ellipsis">💡 Tech Stack & Skills</CardTitle>
+          </CardHeader>
+          <CardContent className="mt-4 flex flex-wrap gap-2 p-0">
             {["Android (Kotlin & Java)", "React Native", "Flutter", "React", "Git", "CI/CD", "Clean Architecture & MVVM", "Code Review", "Performance Optimization", "Product-Centric Development"].map((skill, index) => (
-              <span key={index} className="bg-blue-500 text-white px-3 py-1 rounded-md text-sm">
+              <Badge key={index} variant="default" className="animate-bounce-in-delay" style={{ animationDelay: `${index * 0.1}s` }}>
                 {skill}
-              </span>
+              </Badge>
             ))}
-          </div>
-        </div>
+          </CardContent>
+        </Card>
 
         {/* Education Section */}
-        <div className="bg-gray-100 p-4 rounded-md shadow">
-          <h2 className="text-2xl font-semibold border-b pb-2">🎓 Education</h2>
-          <p className="mt-4">
-            <strong>Hanoi University of Science and Technology</strong> <br />
-            Engineer&apos;s Degree in <strong>Computer Software Engineering</strong> (2009 - 2014) <br />
-            <span className="text-gray-500">ICT Program - Grade: Good</span>
-          </p>
-        </div>
+        <Card className="p-4 hover:shadow-xl transition-shadow duration-300">
+          <CardHeader className="p-0">
+            <CardTitle className="text-2xl font-semibold border-b pb-2 whitespace-nowrap overflow-hidden text-ellipsis">🎓 Education</CardTitle>
+          </CardHeader>
+          <CardContent className="mt-4 p-0 text-muted-foreground">
+            <p>
+              <strong>Hanoi University of Science and Technology</strong> <br />
+              Engineer&apos;s Degree in <strong>Computer Software Engineering</strong> (2009 - 2014) <br />
+              <span className="text-muted-foreground">ICT Program - Grade: Good</span>
+            </p>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

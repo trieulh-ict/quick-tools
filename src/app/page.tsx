@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+
 import { useState, useEffect } from 'react';
 import JsonFormatter from '../components/JsonFormatter';
 import MarkdownEditor from '../components/MarkdownEditor';
@@ -12,6 +12,11 @@ import TimeConverter from '../components/TimeConverter';
 import PlantUMLVisualizer from '../components/PlantUMLVisualizer';
 import AndroidAssetGenerator from '../components/AndroidAssetGenerator';
 import VimCheatSheet from '../components/VimCheatSheet';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Badge } from '@/components/ui/badge';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 export default function Home() {
   const [selectedTool, setSelectedTool] = useState('');
@@ -46,19 +51,16 @@ export default function Home() {
   return (
     <div className="flex min-h-screen font-sans">
       {/* Sidebar */}
-      <aside className="w-108 bg-gradient-to-b from-gray-900 to-gray-800 text-white p-6 flex flex-col items-center shadow-lg border-r border-gray-900 shadow-md">
+      <Card className="w-108 bg-gradient-to-b from-gray-900 to-gray-800 text-white p-6 flex flex-col items-center shadow-lg border-r border-gray-900 shadow-md rounded-none">
         {/* Author Profile Section */}
         <div className="flex flex-col items-center text-center">
           {/* Avatar Container */}
           <div className="relative w-24 h-24 rounded-xl flex items-center justify-center">
             <div className="cursor-pointer" onClick={() => setSelectedTool('')}>
-              <Image
-                src={`${process.env.NEXT_PUBLIC_BASE_PATH}/avatar.jpeg`}
-                alt="Lê Hải Triều"
-                width={120}
-                height={120}
-                className="rounded-full"
-              />
+              <Avatar className="w-24 h-24">
+                <AvatarImage src={`${process.env.NEXT_PUBLIC_BASE_PATH}/avatar.jpeg`} alt="Lê Hải Triều" />
+                <AvatarFallback>LT</AvatarFallback>
+              </Avatar>
             </div>
             {/* Online Indicator */}
             <div className="absolute bottom-0 right-0">
@@ -71,9 +73,9 @@ export default function Home() {
 
           {/* Name & Title */}
           <h1 className="text-xl font-semibold mt-3">Lê Hải Triều</h1>
-          <span className="bg-gray-700 text-gray-300 text-sm px-3 py-1 rounded-lg mt-1">
+          <Badge variant="secondary" className="mt-1">
             Android Developer
-          </span>
+          </Badge>
 
           {/* Contact Information */}
           <div className="mt-4 w-full text-left">
@@ -100,110 +102,112 @@ export default function Home() {
             Quick Tools
           </div>
 
-          <ul className="space-y-2 mt-3">
-            <li
-              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-transform duration-300 whitespace-nowrap transform ${selectedTool === 'json'
-                ? 'bg-gray-700 shadow-md scale-[1.02]'
-                : 'hover:bg-gray-700 hover:text-white'
-                }`}
-              onClick={() => setSelectedTool('json')}
-            >
-              JSON Formatter
-            </li>
-            <li
-              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-transform duration-300 whitespace-nowrap transform ${selectedTool === 'markdown'
-                ? 'bg-gray-700 shadow-md scale-[1.02]'
-                : 'hover:bg-gray-700 hover:text-white'
-                }`}
-              onClick={() => setSelectedTool('markdown')}
-            >
-              Markdown Editor
-            </li>
-            <li
-              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-transform duration-300 whitespace-nowrap transform ${selectedTool === 'plantuml'
-                ? 'bg-gray-700 shadow-md scale-[1.02]'
-                : 'hover:bg-gray-700 hover:text-white'
-                }`}
-              onClick={() => setSelectedTool('plantuml')}
-            >
-              PlantUML Visualizer
-            </li>
-            <li
-              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-transform duration-300 whitespace-nowrap transform ${selectedTool === 'base64'
-                ? 'bg-gray-700 shadow-md scale-[1.02]'
-                : 'hover:bg-gray-700 hover:text-white'
-                }`}
-              onClick={() => setSelectedTool('base64')}
-            >
-              Base64 Decoder & Encoder
-            </li>
-            <li
-              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-transform duration-300 whitespace-nowrap transform ${selectedTool === 'image-base64'
-                ? 'bg-gray-700 shadow-md scale-[1.02]'
-                : 'hover:bg-gray-700 hover:text-white'
-                }`}
-              onClick={() => setSelectedTool('image-base64')}
-            >
-              Image to Base64 & Base64 to Image
-            </li>
-            <li
-              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-transform duration-300 whitespace-nowrap transform ${selectedTool === 'color'
-                ? 'bg-gray-700 shadow-md scale-[1.02]'
-                : 'hover:bg-gray-700 hover:text-white'
-                }`}
-              onClick={() => setSelectedTool('color')}
-            >
-              Color Converter
-            </li>
-            <li
-              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-transform duration-300 whitespace-nowrap transform ${selectedTool === 'time'
-                ? 'bg-gray-700 shadow-md scale-[1.02]'
-                : 'hover:bg-gray-700 hover:text-white'
-                }`}
-              onClick={() => setSelectedTool('time')}
-            >
-              Time Converter
-            </li>
-            <li
-              className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-transform duration-300 whitespace-nowrap transform ${selectedTool === 'android-assets'
-                ? 'bg-gray-700 shadow-md scale-[1.02]'
-                : 'hover:bg-gray-700 hover:text-white'
-                }`}
-              onClick={() => setSelectedTool('android-assets')}
-            >
-              Android Asset Generator
-            </li>
-            {/* Resources Section */}
-            <div className="mt-10 text-left text-gray-300 font-bold text-sm uppercase tracking-wide">
-              Resources
-            </div>
-
+          <ScrollArea className="h-[calc(100vh-350px)] pr-4">
             <ul className="space-y-2 mt-3">
-              <li
-                className={`w-full text-left ml-3 px-2 py-2 text-sm rounded-lg cursor-pointer transition-transform duration-300 whitespace-nowrap transform ${selectedTool === 'vim'
-                  ? 'bg-gray-700 shadow-md scale-[1.02]'
-                  : 'hover:bg-gray-700 hover:text-white'
-                  }`}
-                onClick={() => setSelectedTool('vim')}
-              >
-                Vim Cheat Sheet
+              <li>
+                <Button
+                  variant={selectedTool === 'json' ? 'secondary' : 'ghost'}
+                  className="w-full justify-start"
+                  onClick={() => setSelectedTool('json')}
+                >
+                  JSON Formatter
+                </Button>
               </li>
+              <li>
+                <Button
+                  variant={selectedTool === 'markdown' ? 'secondary' : 'ghost'}
+                  className="w-full justify-start"
+                  onClick={() => setSelectedTool('markdown')}
+                >
+                  Markdown Editor
+                </Button>
+              </li>
+              <li>
+                <Button
+                  variant={selectedTool === 'plantuml' ? 'secondary' : 'ghost'}
+                  className="w-full justify-start"
+                  onClick={() => setSelectedTool('plantuml')}
+                >
+                  PlantUML Visualizer
+                </Button>
+              </li>
+              <li>
+                <Button
+                  variant={selectedTool === 'base64' ? 'secondary' : 'ghost'}
+                  className="w-full justify-start"
+                  onClick={() => setSelectedTool('base64')}
+                >
+                  Base64 Decoder & Encoder
+                </Button>
+              </li>
+              <li>
+                <Button
+                  variant={selectedTool === 'image-base64' ? 'secondary' : 'ghost'}
+                  className="w-full justify-start"
+                  onClick={() => setSelectedTool('image-base64')}
+                >
+                  Image to Base64 & Base64 to Image
+                </Button>
+              </li>
+              <li>
+                <Button
+                  variant={selectedTool === 'color' ? 'secondary' : 'ghost'}
+                  className="w-full justify-start"
+                  onClick={() => setSelectedTool('color')}
+                >
+                  Color Converter
+                </Button>
+              </li>
+              <li>
+                <Button
+                  variant={selectedTool === 'time' ? 'secondary' : 'ghost'}
+                  className="w-full justify-start"
+                  onClick={() => setSelectedTool('time')}
+                >
+                  Time Converter
+                </Button>
+              </li>
+              <li>
+                <Button
+                  variant={selectedTool === 'android-assets' ? 'secondary' : 'ghost'}
+                  className="w-full justify-start"
+                  onClick={() => setSelectedTool('android-assets')}
+                >
+                  Android Asset Generator
+                </Button>
+              </li>
+              {/* Resources Section */}
+              <div className="mt-10 text-left text-gray-300 font-bold text-sm uppercase tracking-wide">
+                Resources
+              </div>
+
+              <ul className="space-y-2 mt-3">
+                <li>
+                  <Button
+                    variant={selectedTool === 'vim' ? 'secondary' : 'ghost'}
+                    className="w-full justify-start"
+                    onClick={() => setSelectedTool('vim')}
+                  >
+                    Vim Cheat Sheet
+                  </Button>
+                </li>
+              </ul>
+              <div className="mt-6 w-full">
+                <hr className="border-gray-600 my-4" />
+                <li>
+                  <Button
+                    variant={selectedTool === 'about' ? 'secondary' : 'ghost'}
+                    className="w-full justify-center"
+                    onClick={() => setSelectedTool('about')}
+                  >
+                    #About me
+                  </Button>
+                </li>
+              </div>
             </ul>
-            <div className="mt-6 w-full">
-              <hr className="border-gray-600 my-4" />
-              <li
-                className={`w-full text-center px-2 py-2 text-sm rounded-lg cursor-pointer transition-transform duration-300 whitespace-nowrap transform ${selectedTool === 'about'
-                  ? 'bg-gray-700 shadow-md scale-[1.02]'
-                  : 'hover:bg-gray-700 hover:text-white'
-                  }`}
-                onClick={() => setSelectedTool('about')}
-              >
-                #About me
-              </li>
-            </div>
-          </ul>
+          </ScrollArea>
         </nav>
-      </aside>
+      </Card>
 
       {/* Main Content Area */}
       <main className="animate-fade-in flex-grow min-w-240 bg-gray-50 p-8 flex items-center justify-center w-full">
@@ -231,10 +235,14 @@ function QuoteDisplay() {
   }, []);
 
   return (
-    <div className="text-center">
-      <h2 className="text-2xl font-bold">Welcome to Quick Tools!</h2>
-      <p className="mt-4">Select a tool from the sidebar to get started.</p>
-      {quote && <blockquote className="mt-8 px-8 italic text-gray-600">“{quote}”</blockquote>}
-    </div>
+    <Card className="text-center p-8">
+      <CardHeader>
+        <CardTitle className="text-2xl font-bold whitespace-nowrap overflow-hidden text-ellipsis">Welcome to Quick Tools!</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <p className="mt-4">Select a tool from the sidebar to get started.</p>
+        {quote && <blockquote className="mt-8 px-8 italic text-gray-600">“{quote}”</blockquote>}
+      </CardContent>
+    </Card>
   );
 }
