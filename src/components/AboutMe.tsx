@@ -59,7 +59,7 @@ export default function AboutMe() {
             {[
               { title: "Senior Android Developer", company: "CIMB Thai Bank", duration: "Oct 2022 - Present", description: "Leading fintech Android development for seamless banking solutions." },
               { title: "Senior Android Developer", company: "Zipmex", duration: "Jun 2022 - Sep 2022", description: "Developed secure crypto trading applications." },
-              { title: "Senior Android Developer", company: "Techcombank (TCB)", duration: "Jan 2022 - Jun 2022", description: "Built and optimized mobile banking applications." },
+              { title: "Senior Android Developer", company: "Techcombank (TCB)", duration: "Jan 2022 - Oct 2022", description: "Built and optimized mobile banking applications." },
               { title: "Senior Android Developer", company: "One Mount Group", duration: "Oct 2019 - Dec 2021", description: "Enterprise-level Android development and best practices." },
               { title: "Senior Android Developer", company: "Planday", duration: "Sep 2018 - Oct 2019", description: "Android and Kotlin development for scalable apps." },
               { title: "Android Developer (Mid.)", company: "Got It", duration: "Jan 2017 - Sep 2018", description: "Worked on Android projects using Java and React Native." },
