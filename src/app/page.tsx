@@ -52,57 +52,56 @@ export default function Home() {
     <div className="flex min-h-screen font-sans">
       {/* Sidebar */}
       <Card className="w-108 bg-gradient-to-b from-gray-900 to-gray-800 text-white p-6 flex flex-col items-center shadow-lg border-r border-gray-900 shadow-md rounded-none">
-        {/* Author Profile Section */}
-        <div className="flex flex-col items-center text-center">
-          {/* Avatar Container */}
-          <div className="relative w-24 h-24 rounded-xl flex items-center justify-center">
-            <div className="cursor-pointer" onClick={() => setSelectedTool('')}>
-              <Avatar className="w-24 h-24">
-                <AvatarImage src={`${process.env.NEXT_PUBLIC_BASE_PATH}/avatar.jpeg`} alt="Lê Hải Triều" />
-                <AvatarFallback>LT</AvatarFallback>
-              </Avatar>
+        <ScrollArea className="h-[calc(100vh-80px)]">
+          {/* Author Profile Section */}
+          <div className="flex flex-col items-center text-center">
+            {/* Avatar Container */}
+            <div className="relative w-24 h-24 rounded-xl flex items-center justify-center">
+              <div className="cursor-pointer" onClick={() => setSelectedTool('')}>
+                <Avatar className="w-24 h-24">
+                  <AvatarImage src={`${process.env.NEXT_PUBLIC_BASE_PATH}/avatar.jpeg`} alt="Lê Hải Triều" />
+                  <AvatarFallback>LT</AvatarFallback>
+                </Avatar>
+              </div>
+              {/* Online Indicator */}
+              <div className="absolute bottom-0 right-0">
+                {/* Pulsing Outer Effect */}
+                <div className="absolute w-4 h-4 bg-green-500 opacity-75 rounded-full animate-ping"></div>
+                {/* Solid Inner Circle */}
+                <div className="relative w-4 h-4 bg-green-500 rounded-full border-2 border-gray-800"></div>
+              </div>
             </div>
-            {/* Online Indicator */}
-            <div className="absolute bottom-0 right-0">
-              {/* Pulsing Outer Effect */}
-              <div className="absolute w-4 h-4 bg-green-500 opacity-75 rounded-full animate-ping"></div>
-              {/* Solid Inner Circle */}
-              <div className="relative w-4 h-4 bg-green-500 rounded-full border-2 border-gray-800"></div>
+
+            {/* Name & Title */}
+            <h1 className="text-xl font-semibold mt-3">Lê Hải Triều</h1>
+            <Badge variant="secondary" className="mt-1">
+              Android Developer
+            </Badge>
+
+            {/* Contact Information */}
+            <div className="mt-4 w-full text-left">
+              <div className="flex items-center gap-2 text-gray-300">
+                📧
+                <a href="mailto:trieulh.bk@gmail.com" className="text-sm truncate hover:underline">
+                  trieulh.bk@gmail.com
+                </a>
+              </div>
+              {/* <div className="flex items-center gap-2 text-gray-300 mt-2">
+                📱 <span className="text-sm">+84 79314****</span>
+              </div> */}
+              <div className="flex items-center gap-2 text-gray-300 mt-2">
+                📍 <span className="text-sm">Hanoi, Vietnam</span>
+              </div>
+              <hr className="border-gray-600 my-4" />
             </div>
           </div>
 
-          {/* Name & Title */}
-          <h1 className="text-xl font-semibold mt-3">Lê Hải Triều</h1>
-          <Badge variant="secondary" className="mt-1">
-            Android Developer
-          </Badge>
-
-          {/* Contact Information */}
-          <div className="mt-4 w-full text-left">
-            <hr className="border-gray-600 my-4" />
-            <div className="flex items-center gap-2 text-gray-300">
-              📧
-              <a href="mailto:trieulh.bk@gmail.com" className="text-sm truncate hover:underline">
-                trieulh.bk@gmail.com
-              </a>
+          {/* Navigation / Tools List */}
+          <nav className="w-full">
+            {/* Quick Tools Label */}
+            <div className="text-left text-gray-300 font-bold text-sm uppercase tracking-wide">
+              Quick Tools
             </div>
-            <div className="flex items-center gap-2 text-gray-300 mt-2">
-              📱 <span className="text-sm">+84 79314****</span>
-            </div>
-            <div className="flex items-center gap-2 text-gray-300 mt-2">
-              📍 <span className="text-sm">Hanoi, Vietnam</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Navigation / Tools List */}
-        <nav className="mt-10 w-full">
-          {/* Quick Tools Label */}
-          <div className="text-left text-gray-300 font-bold text-sm uppercase tracking-wide">
-            Quick Tools
-          </div>
-
-          <ScrollArea className="h-[calc(100vh-350px)] pr-4">
             <ul className="space-y-2 mt-3">
               <li>
                 <Button
@@ -205,8 +204,8 @@ export default function Home() {
                 </li>
               </div>
             </ul>
-          </ScrollArea>
-        </nav>
+          </nav>
+        </ScrollArea>
       </Card>
 
       {/* Main Content Area */}

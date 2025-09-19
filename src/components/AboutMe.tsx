@@ -57,13 +57,13 @@ export default function AboutMe() {
           </CardHeader>
           <ul className="mt-4 space-y-6">
             {[
-              { title: "Senior Android Developer", company: "CIMB Thai Bank", duration: "Oct 2022 - Present", description: "Leading fintech Android development for seamless banking solutions." },
-              { title: "Senior Android Developer", company: "Zipmex", duration: "Jun 2022 - Sep 2022", description: "Developed secure crypto trading applications." },
-              { title: "Senior Android Developer", company: "Techcombank (TCB)", duration: "Jan 2022 - Oct 2022", description: "Built and optimized mobile banking applications." },
-              { title: "Senior Android Developer", company: "One Mount Group", duration: "Oct 2019 - Dec 2021", description: "Enterprise-level Android development and best practices." },
-              { title: "Senior Android Developer", company: "Planday", duration: "Sep 2018 - Oct 2019", description: "Android and Kotlin development for scalable apps." },
-              { title: "Android Developer (Mid.)", company: "Got It", duration: "Jan 2017 - Sep 2018", description: "Worked on Android projects using Java and React Native." },
-              { title: "Android Developer", company: "Airpoli", duration: "Mar 2016 - 2017", description: "Developing Android applications for an education startup." },
+              { title: "Senior Mobile Engineer", company: "CIMB Thai Bank", duration: "Oct 2022 - Present", description: "Leading fintech Android development for seamless banking solutions." },
+              { title: "Senior Mobile Engineer", company: "Zipmex", duration: "Jun 2022 - Sep 2022", description: "Developed secure crypto trading applications." },
+              { title: "Senior Mobile Engineer", company: "Techcombank (TCB)", duration: "Jan 2022 - Oct 2022", description: "Built and optimized mobile banking applications." },
+              { title: "Senior Mobile Engineer", company: "One Mount Group", duration: "Oct 2019 - Dec 2021", description: "Enterprise-level Android development and best practices." },
+              { title: "Senior Mobile Engineer", company: "Planday", duration: "Sep 2018 - Oct 2019", description: "Android and Kotlin development for scalable apps." },
+              { title: "Mobile Engineer (Mid.)", company: "Got It", duration: "Jan 2017 - Sep 2018", description: "Worked on Android projects using Java and React Native." },
+              { title: "Mobile Engineer", company: "Airpoli", duration: "Mar 2016 - 2017", description: "Developing Android applications for an education startup." },
               { title: "Software Engineer", company: "Samsung Vietnam Mobile R&D Center", duration: "Jun 2014 - Mar 2016", description: "Worked on mobile software development for Samsung devices." },
             ].map((job, index) => (
               <li key={index} className="p-4 rounded-md shadow-sm hover:shadow-md transition-shadow duration-200">
